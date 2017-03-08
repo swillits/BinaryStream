@@ -7,8 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5D02AB721E709BD200BB60D4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02AB711E709BD200BB60D4 /* main.swift */; };
+		5D02AB891E709C5700BB60D4 /* BinaryStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02AB881E709C5700BB60D4 /* BinaryStream.swift */; };
+		5D02AB8B1E709C5D00BB60D4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02AB8A1E709C5D00BB60D4 /* main.swift */; };
+		5D02AB8D1E709C6400BB60D4 /* BinaryStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02AB8C1E709C6400BB60D4 /* BinaryStreamTests.swift */; };
+		5D02AB911E70A5E600BB60D4 /* BinaryStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02AB881E709C5700BB60D4 /* BinaryStream.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5D02AB8F1E70A56400BB60D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D02AB661E709BD200BB60D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D02AB6D1E709BD200BB60D4;
+			remoteInfo = BinaryStream;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5D02AB6C1E709BD200BB60D4 /* CopyFiles */ = {
@@ -24,11 +37,22 @@
 
 /* Begin PBXFileReference section */
 		5D02AB6E1E709BD200BB60D4 /* BinaryStream */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BinaryStream; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D02AB711E709BD200BB60D4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		5D02AB7E1E709BFE00BB60D4 /* BinaryStreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BinaryStreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D02AB881E709C5700BB60D4 /* BinaryStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryStream.swift; sourceTree = SOURCE_ROOT; };
+		5D02AB8A1E709C5D00BB60D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = SOURCE_ROOT; };
+		5D02AB8C1E709C6400BB60D4 /* BinaryStreamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryStreamTests.swift; sourceTree = SOURCE_ROOT; };
+		5D02AB8E1E709C7F00BB60D4 /* TestsInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TestsInfo.plist; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5D02AB6B1E709BD200BB60D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D02AB7B1E709BFE00BB60D4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -50,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				5D02AB6E1E709BD200BB60D4 /* BinaryStream */,
+				5D02AB7E1E709BFE00BB60D4 /* BinaryStreamTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,7 +82,10 @@
 		5D02AB701E709BD200BB60D4 /* BinaryStream */ = {
 			isa = PBXGroup;
 			children = (
-				5D02AB711E709BD200BB60D4 /* main.swift */,
+				5D02AB8A1E709C5D00BB60D4 /* main.swift */,
+				5D02AB881E709C5700BB60D4 /* BinaryStream.swift */,
+				5D02AB8C1E709C6400BB60D4 /* BinaryStreamTests.swift */,
+				5D02AB8E1E709C7F00BB60D4 /* TestsInfo.plist */,
 			);
 			path = BinaryStream;
 			sourceTree = "<group>";
@@ -82,6 +110,24 @@
 			productReference = 5D02AB6E1E709BD200BB60D4 /* BinaryStream */;
 			productType = "com.apple.product-type.tool";
 		};
+		5D02AB7D1E709BFE00BB60D4 /* BinaryStreamTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D02AB831E709BFE00BB60D4 /* Build configuration list for PBXNativeTarget "BinaryStreamTests" */;
+			buildPhases = (
+				5D02AB7A1E709BFE00BB60D4 /* Sources */,
+				5D02AB7B1E709BFE00BB60D4 /* Frameworks */,
+				5D02AB7C1E709BFE00BB60D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5D02AB901E70A56400BB60D4 /* PBXTargetDependency */,
+			);
+			name = BinaryStreamTests;
+			productName = BinaryStreamTests;
+			productReference = 5D02AB7E1E709BFE00BB60D4 /* BinaryStreamTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -94,6 +140,12 @@
 				TargetAttributes = {
 					5D02AB6D1E709BD200BB60D4 = {
 						CreatedOnToolsVersion = 8.2;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+					};
+					5D02AB7D1E709BFE00BB60D4 = {
+						CreatedOnToolsVersion = 8.2;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -111,20 +163,49 @@
 			projectRoot = "";
 			targets = (
 				5D02AB6D1E709BD200BB60D4 /* BinaryStream */,
+				5D02AB7D1E709BFE00BB60D4 /* BinaryStreamTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5D02AB7C1E709BFE00BB60D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5D02AB6A1E709BD200BB60D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D02AB721E709BD200BB60D4 /* main.swift in Sources */,
+				5D02AB8B1E709C5D00BB60D4 /* main.swift in Sources */,
+				5D02AB891E709C5700BB60D4 /* BinaryStream.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D02AB7A1E709BFE00BB60D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D02AB8D1E709C6400BB60D4 /* BinaryStreamTests.swift in Sources */,
+				5D02AB911E70A5E600BB60D4 /* BinaryStream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5D02AB901E70A56400BB60D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D02AB6D1E709BD200BB60D4 /* BinaryStream */;
+			targetProxy = 5D02AB8F1E70A56400BB60D4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5D02AB731E709BD200BB60D4 /* Debug */ = {
@@ -218,7 +299,10 @@
 		5D02AB761E709BD200BB60D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -226,8 +310,41 @@
 		5D02AB771E709BD200BB60D4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		5D02AB841E709BFE00BB60D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = TestsInfo.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.araeliumgroup.BinaryStreamTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = BinaryStream;
+			};
+			name = Debug;
+		};
+		5D02AB851E709BFE00BB60D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = TestsInfo.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.araeliumgroup.BinaryStreamTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = BinaryStream;
 			};
 			name = Release;
 		};
@@ -248,6 +365,14 @@
 			buildConfigurations = (
 				5D02AB761E709BD200BB60D4 /* Debug */,
 				5D02AB771E709BD200BB60D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5D02AB831E709BFE00BB60D4 /* Build configuration list for PBXNativeTarget "BinaryStreamTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D02AB841E709BFE00BB60D4 /* Debug */,
+				5D02AB851E709BFE00BB60D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
