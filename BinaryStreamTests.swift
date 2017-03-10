@@ -47,10 +47,9 @@ class BinaryStreamTests: XCTestCase {
 	
 	
 	func testWriting(littleEndian: Bool, dataStr: String) -> NSData {
-		let mdata = NSMutableData()
-		let wdest = BinaryStream.MutableMemoryDestination(data: mdata, resizable: true)
+		let wdest = BinaryStream.DataDestination()
 		do {
-			let wbs = MutableBinaryStream(destination: wdest)
+			let wbs = BinaryStream(destination: wdest)
 			
 			wbs.littleEndian = littleEndian
 			
@@ -95,14 +94,14 @@ class BinaryStreamTests: XCTestCase {
 	
 	
 	func testReading(littleEndian: Bool, data: NSData) {
-		let rdest = BinaryStream.MemoryDestination(data: data)
+		let rdest = BinaryStream.DataDestination(data: data)
 		let rbs = BinaryStream(destination: rdest)
 		
 		rbs.littleEndian = littleEndian
 		
 		
 		XCTAssert(rdest.data == data)
-		XCTAssert(rbs.length == data.length)
+		XCTAssert(rbs.length == UInt64(data.length))
 		XCTAssert(rbs.isEndOfStream == false)
 		XCTAssert(rbs.position == 0)
 		

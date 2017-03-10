@@ -77,8 +77,12 @@ class BinaryStream {
 	}
 	
 	
-	func readData(length: Int) throws -> Data {
-		return try destination.readData(length: length)
+	func readData(length readLength: Int) throws -> Data {
+		var data = Data(count: length)
+		try data.withUnsafeMutableBytes { (pointer: UnsafeMutablePointer)  in
+			try destination.read(bytes: pointer, length: length)
+		}
+		return data
 	}
 	
 	
@@ -190,7 +194,9 @@ class MutableBinaryStream: BinaryStream {
 	
 	
 	func write(data: Data) throws {
-		try mutableDestination.write(data)
+		try data.withUnsafeBytes { (ptr: UnsafePointer) in
+			try mutableDestination.write(bytes: ptr, length: data.count)
+		}
 	}
 	
 	
@@ -291,10 +297,10 @@ class MutableBinaryStream: BinaryStream {
 	}
 	
 }
-	
 
 
-	
+
+
 // MARK: - Types
 
 
@@ -305,15 +311,12 @@ protocol BinaryStreamDestination {
 	func setPosition(_ pos: Int) throws
 	
 	func read(bytes: UnsafeMutableRawPointer, length: Int) throws
-	func readData(length: Int) throws -> Data
 }
 
 
 
 protocol MutableBinaryStreamDestination: BinaryStreamDestination {
-	//var isResizable: Bool { get }
 	func write(bytes: UnsafeRawPointer, length: Int) throws
-	func write(_ data: Data) throws
 }
 
 
@@ -325,9 +328,9 @@ enum BinaryStreamError: Error {
 	/// The destination is not resizable
 	case notResizable
 }
-	
-	
-	
+
+
+
 
 
 
@@ -384,16 +387,6 @@ extension BinaryStream {
 			}
 			_data.getBytes(bytes, range: NSMakeRange(Int(position), Int(length)))
 			position += length
-		}
-		
-		
-		func readData(length: Int) throws -> Data {
-			guard Int(_data.length) >= position + length else {
-				throw BinaryStreamError.outOfBounds
-			}
-			let data = _data.subdata(with: NSMakeRange(Int(position), Int(length)))
-			position += length
-			return data
 		}
 	}
 	
@@ -457,20 +450,14 @@ extension BinaryStream {
 		}
 		
 		
-		func write(_ data: Data) {
-			data.withUnsafeBytes { (ptr: UnsafePointer) in
-				write(bytes: ptr, length: data.count)
-			}
-		}
-		
-		
-		func write(bytes: UnsafeRawPointer, length: Int) {
-			let mdata = mutableData
-			
-			if mdata.length >= position + length {
-				memcpy(mdata.mutableBytes, bytes, Int(length))
-			} else {
+		func write(bytes: UnsafeRawPointer, length: Int) throws {
+			if _data.length >= position + length {
+				memcpy(UnsafeMutableRawPointer(mutating: _data.bytes.advanced(by: position)), bytes, Int(length))
+			} else if resizable {
+				let mdata = mutableData
 				mdata.append(bytes, length: Int(length))
+			} else {
+				throw BinaryStreamError.notResizable
 			}
 			
 			position += length
