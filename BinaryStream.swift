@@ -79,7 +79,7 @@ class BinaryStream {
 	
 	func readData(length readLength: Int) throws -> Data {
 		var data = Data(count: length)
-		try data.withUnsafeMutableBytes { (pointer: UnsafeMutablePointer)  in
+		try data.withUnsafeMutableBytes { (pointer: UnsafeMutablePointer<Int8>)  in
 			try destination.read(bytes: pointer, length: length)
 		}
 		return data
@@ -96,7 +96,7 @@ class BinaryStream {
 		var x: UInt32 = 0
 		try destination.read(bytes: &x, length: 4)
 		x = (littleEndian == isHostLittleEndian) ? x : x.byteSwapped
-		return unsafeBitCast(x, to: Float.self)
+		return Float(bitPattern: x)
 	}
 	
 	
@@ -104,7 +104,7 @@ class BinaryStream {
 		var x: UInt64 = 0
 		try destination.read(bytes: &x, length: 8)
 		x = (littleEndian == isHostLittleEndian) ? x : x.byteSwapped
-		return unsafeBitCast(x, to: Double.self)
+		return Double(bitPattern: x)
 	}
 	
 	
@@ -159,22 +159,22 @@ class BinaryStream {
 	
 	
 	func readInt8() throws -> Int8 {
-		return unsafeBitCast(try readUInt8(), to: Int8.self)
+		return Int8(bitPattern: try readUInt8())
 	}
 	
 	
 	func readInt16() throws -> Int16 {
-		return unsafeBitCast(try readUInt16(), to: Int16.self)
+		return Int16(bitPattern: try readUInt16())
 	}
 	
 	
 	func readInt32() throws -> Int32 {
-		return unsafeBitCast(try readUInt32(), to: Int32.self)
+		return Int32(bitPattern: try readUInt32())
 	}
 	
 	
 	func readInt64() throws -> Int64 {
-		return unsafeBitCast(try readUInt64(), to: Int64.self)
+		return Int64(bitPattern: try readUInt64())
 	}
 }
 
@@ -194,7 +194,7 @@ class MutableBinaryStream: BinaryStream {
 	
 	
 	func write(data: Data) throws {
-		try data.withUnsafeBytes { (ptr: UnsafePointer) in
+		try data.withUnsafeBytes { (ptr: UnsafePointer<Int8>) in
 			try mutableDestination.write(bytes: ptr, length: data.count)
 		}
 	}
@@ -216,14 +216,14 @@ class MutableBinaryStream: BinaryStream {
 	
 	
 	func write(float32 value: Float32) throws {
-		var x = unsafeBitCast(value, to: UInt32.self)
+		var x = value.bitPattern
 		x = littleEndian ? x.littleEndian : x.bigEndian
 		try write(bytes: &x, length: 4)
 	}
 	
 	
 	func write(float64 value: Float64) throws {
-		var x = unsafeBitCast(value, to: UInt64.self)
+		var x = value.bitPattern
 		x = littleEndian ? x.littleEndian : x.bigEndian
 		try write(bytes: &x, length: 8)
 	}
@@ -273,27 +273,27 @@ class MutableBinaryStream: BinaryStream {
 	
 	
 	func write(int8 value: Int8) throws {
-		try write(uint8: unsafeBitCast(value, to: UInt8.self))
+		try write(uint8: UInt8(bitPattern: value))
 	}
 	
 	
 	func write(int16 value: Int16) throws {
-		try write(uint16: unsafeBitCast(value, to: UInt16.self))
+		try write(uint16: UInt16(bitPattern: value))
 	}
 	
 	
 	func write(int24 value: Int32) throws {
-		try write(uint24: unsafeBitCast(value, to: UInt32.self))
+		try write(uint24: UInt32(bitPattern: value))
 	}
 	
 	
 	func write(int32 value: Int32) throws {
-		try write(uint32: unsafeBitCast(value, to: UInt32.self))
+		try write(uint32: UInt32(bitPattern: value))
 	}
 	
 	
 	func write(int64 value: Int64) throws {
-		try write(uint64: unsafeBitCast(value, to: UInt64.self))
+		try write(uint64: UInt64(bitPattern: value))
 	}
 	
 }
